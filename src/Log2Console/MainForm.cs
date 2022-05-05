@@ -700,7 +700,7 @@ namespace Log2Console
                 _lastHighlightedLogger = logMsgItem.Parent;
             }
         }
-
+        private const string RTF_HEADER = @"{\rtf1\ansi\ansicpg936\deff0\deflang1033\deflangfe2052";
         private void SetLogMessageDetail(LogMessageItem logMsgItem)
         {
             // Store the text to avoid editing without settings the control
@@ -715,7 +715,7 @@ namespace Log2Console
             else
             {
                 StringBuilder sb = new StringBuilder();
-
+                sb.Append(RTF_HEADER);
                 sb.Append(logMsgItem.GetMessageDetails());
 
                 if (UserSettings.Instance.ShowMsgDetailsProperties)

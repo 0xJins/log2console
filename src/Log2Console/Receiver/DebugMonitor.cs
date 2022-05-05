@@ -241,9 +241,20 @@
             try
             {
                 // Everything after the first DWORD is our debugging text
-                IntPtr pString = new IntPtr(
-                    m_SharedMem.ToInt32() + Marshal.SizeOf(typeof(int))
-                );
+                IntPtr pString = IntPtr.Zero;
+                if (Environment.Is64BitProcess)
+                {
+                    pString = new IntPtr(
+                        m_SharedMem.ToInt64() + Marshal.SizeOf(typeof(long))
+                    );
+                }
+                else
+                {
+
+                    pString = new IntPtr(
+                        m_SharedMem.ToInt32() + Marshal.SizeOf(typeof(int))
+                    );
+                }
 
                 while (true)
                 {
